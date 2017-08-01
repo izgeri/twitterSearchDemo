@@ -26,10 +26,10 @@ If desired, I can take more time and do the items on this list. Please let me kn
 * Create a file keys.php with the following variables:
         $twitterConsumerKey, $twitterConsumerSecret, $googleApiKey
   to store the keys you created in the tasks above. Update index.php and findTweets.php to correctly set the path for this file; in general, it's best practice NOT to include this file in a publicly accessible directory (but elsewhere on the server or in a database). If you do include it in your publicly accessible directory, you can direct Apache to ignore the directory using a command like:
-<directorymatch “^/keys/“>
+`<directorymatch “^/keys/“>
   Order deny,allow
   Deny from all
-</directorymatch>
+</directorymatch>`
 added to your httpd.conf file. This will prevent end users from browsing and accessing your API keys.
 
 ##### NOTE:
