@@ -1,0 +1,7 @@
+<?php
+
+$twitterConsumerKey = '';
+$twitterConsumerSecret = '';
+$googleApiKey = '';
+
+?>
