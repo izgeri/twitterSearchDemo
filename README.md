@@ -1,23 +1,21 @@
 # twitterSearchDemo
 Brief, PHP- and JQuery-based Twitter API search demo
 
-## ABOUT THIS APP:
+## About this app
 
-This is a TWITTER SEARCH UTILITY. Given the short timeline and my other obligations, I wanted to use tools I was mostly already familiar with to get this product out of the door quickly. I am currently using mostly straight up JavaScript / JQuery and PHP in the app I have been working on for the past four plus years, so it made sense to find a way to implement this using the same languages. My second choice would have been the security protocols; the security for the app I'm currently working on was already in place when I started working there, but having done some work to maintain it I would be interested in experimenting with more modern and secure ways to authenticate end users.  The postcard creator seemed like it would be much better to make using more modern JS tools, which I'm not yet familiar enough with to implement quickly so that was less of a natural choice for me.
-I've never interacted with the Twitter API or had to imbed tweets into a dynamic webpage before, so it was interesting to learn as I went in implementing this app. Given more time to work on it, I would implement the following (and in this order):
+This is a TWITTER SEARCH UTILITY. It allows you to input a Twitter handle, # tweets, search string, and/or a location, and it returns a list of tweets that match the search.
+
+Future work that would make this page more interesting:
 * get tweets from current location using the HTML5 geolocation API
 * pagination, to improve handling / UX of requests for large numbers of tweets
 * add ability to log in and post a tweet
   * The TwitterOAuth library will make this pretty easy
-* ability to hide / show cards
-  * I'm not sure why this is super useful, but it would be easy enough to implement by adding a link to the card that changes the object to display:none. It would require some reformatting of the way the cards are loaded onto the page at current.
-* ability to drag / drop cards
-  * Also not sure why this would be useful, but there are many JS libraries that allow for drag / drop (like JQuery draggable / droppable) that could be used.
-
-If desired, I can take more time and do the items on this list. Please let me know if you'd be interested in seeing these updates.
+* add ability to save tweets
 
 
-## DIRECTIONS FOR USE:
+## Using this app
+
+
 
 * Download repository from github
 * Install TwitterOAuth using Composer - the composer.json file is already included in the repository, so once you've downloaded the repos you can just run "php composer.phar install" in your working directory. If you don't already have Composer installed, you can find instructions for installing it here: https://getcomposer.org.

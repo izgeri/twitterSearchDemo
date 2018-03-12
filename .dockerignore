@@ -1,0 +1,6 @@
+.git
+.dockerignore
+
+# Ignore our scripts
+build-image.sh
+run.sh
