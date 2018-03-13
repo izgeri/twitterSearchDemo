@@ -179,8 +179,8 @@ class twitterSearchTest extends TestCase {
 	public function testSearchReturnsArray() {
 
 		$numTweets = 3;
-		$oembedResponse = json_decode(json_encode(array(
-			'html' => 'tweetBlock')));
+		$oembedResponse = json_encode(array(
+			'html' => 'tweetBlock'));
 		$getResponse = json_decode(json_encode(array(
 			'statuses' => array(
 				array(
@@ -216,6 +216,7 @@ class twitterSearchTest extends TestCase {
 
 		// then prepare the curl mock
 		$curl = $this->getMockBuilder('curl')
+			->setMethods(['initiate', 'setOptArray', 'execute', 'getErrorNumber', 'close'])
 			->getMock();
 
 		$curl->expects($this->exactly($numTweets))
@@ -236,14 +237,14 @@ class twitterSearchTest extends TestCase {
 		$searchResults = $this->twitter->search('', 3, 'term', '', false);
 
 		$this->assertEquals(3, sizeof($searchResults));
-		$this->assertEquals('array', typeof($searchResults));
+		$this->assertTrue(is_array($searchResults));
 	}
 
 	public function testSearchSearchArray() {
 
 		$numTweets = 3;
-                $oembedResponse = json_decode(json_encode(array(
-                        'html' => 'tweetBlock')));
+                $oembedResponse = json_encode(array(
+                        'html' => 'tweetBlock'));
                 $getResponse = json_decode(json_encode(array(
                         'statuses' => array(
                                 array(
@@ -271,7 +272,7 @@ class twitterSearchTest extends TestCase {
                                 $this->twitter->getConsumerSecret()))
                         ->getMock();
 
-                $twitterOAuth->expects($this->once())
+                $twitterOAuth->expects($this->exactly(4))
                         ->method('get')
                         ->will($this->returnValue($getResponse));
 
@@ -279,19 +280,20 @@ class twitterSearchTest extends TestCase {
 
                 // then prepare the curl mock
                 $curl = $this->getMockBuilder('curl')
+			->setMethods(['initiate', 'setOptArray', 'execute', 'getErrorNumber', 'close'])
                         ->getMock();
 
-                $curl->expects($this->exactly($numTweets))
+                $curl->expects($this->exactly(2 * $numTweets))
                         ->method('initiate');
-                $curl->expects($this->exactly($numTweets))
+                $curl->expects($this->exactly(2 * $numTweets))
                         ->method('setOptArray');
-                $curl->expects($this->exactly($numTweets))
+                $curl->expects($this->exactly(2 * $numTweets))
                         ->method('execute')
                         ->will($this->returnValue($oembedResponse));
-                $curl->expects($this->exactly($numTweets))
+                $curl->expects($this->exactly(2 * $numTweets))
                         ->method('getErrorNumber')
                         ->will($this->returnValue(false));
-                $curl->expects($this->exactly($numTweets))
+                $curl->expects($this->exactly(2 * $numTweets))
                         ->method('close');
 
                 $this->twitter->setCurl($curl);
@@ -316,8 +318,8 @@ class twitterSearchTest extends TestCase {
 	public function testSearchOembedFailureReturnsTextTweet() {
 
 		$numTweets = 1;
-		$oembedResponse = json_decode(json_encode(array(
-			'html' => 'tweetBlock')));
+		$oembedResponse = json_encode(array(
+			'html' => 'tweetBlock'));
 		$getResponse = json_decode(json_encode(array(
 			'statuses' => array(
 				array(
@@ -325,7 +327,7 @@ class twitterSearchTest extends TestCase {
 					'text' => 'textval',
 					'user' => array('name' => 'nameval',
 						'screen_name' => 'snval'),
-					'created_at' => 'createval')
+					'created_at' => '2016-09-23 00:34:19')
 				))));
 		
 		// first prepare the TwitterOAuth mock
@@ -334,7 +336,7 @@ class twitterSearchTest extends TestCase {
 				$this->twitter->getConsumerSecret()))
 			->getMock();
 		
-		$twitterOAuth->expects($this->once())
+		$twitterOAuth->expects($this->exactly(2))
 			->method('get')
 			->will($this->returnValue($getResponse));
 		
@@ -342,6 +344,7 @@ class twitterSearchTest extends TestCase {
 		
 		// then prepare the curl mock
 		$curl = $this->getMockBuilder('curl')
+			->setMethods(['initiate', 'setOptArray', 'execute', 'getErrorNumber', 'close'])
 			->getMock();
 		
 		$curl->expects($this->exactly($numTweets))
@@ -365,7 +368,7 @@ class twitterSearchTest extends TestCase {
 		$expectedResult = '<blockquote class="twitter-tweet" data-lang="en">';
 		$expectedResult .= '<p lang="en" dir="ltr">textval</p>';
 		$expectedResult .= ' &mdash; nameval (@snval)';
-		$expectedResult .= ' <a href="' . $expectedResultUrl . '">createval</a>';
+		$expectedResult .= ' <a href="' . $expectedResultUrl . '">September 23, 2016</a>';
 		$expectedResult .= '</blockquote>';
 			
 		$this->assertEquals(1, sizeof($searchResults));
@@ -399,8 +402,8 @@ class twitterSearchTest extends TestCase {
 	public function testSearchReturnsOembedBlock() {
 		
 		$numTweets = 1;
-		$oembedResponse = json_decode(json_encode(array(
-			'html' => 'tweetBlock')));
+		$oembedResponse = json_encode(array(
+			'html' => 'tweetBlock'));
 		$getResponse = json_decode(json_encode(array(
 			'statuses' => array(
 				array(
@@ -417,7 +420,7 @@ class twitterSearchTest extends TestCase {
 				$this->twitter->getConsumerSecret()))
 			->getMock();
 		
-		$twitterOAuth->expects($this->once())
+		$twitterOAuth->expects($this->exactly(2))
 			->method('get')
 			->will($this->returnValue($getResponse));
 		
@@ -425,6 +428,7 @@ class twitterSearchTest extends TestCase {
 		
 		// then prepare the curl mock
 		$curl = $this->getMockBuilder('curl')
+			->setMethods(['initiate', 'setOptArray', 'execute', 'getErrorNumber', 'close'])
 			->getMock();
 		
 		$curl->expects($this->exactly($numTweets))
