@@ -1,7 +1,9 @@
 FROM php:7.2-apache
 
 # install git (needed by composer later)
-RUN apt-get update && apt-get install -y git
+# install vim (for convenience)
+RUN apt-get update && apt-get install -y git && \
+  apt-get install -y vim
 
 # copy composer from the composer Docker image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
