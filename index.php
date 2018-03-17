@@ -19,7 +19,7 @@ include "keys/keys.php";
 	<script type="text/javascript" src="js/twitter.js"></script>
 </head>
 
-<body>
+<body onload="loadSavedSearches();">
 	<div id="searchBox">
 
 		<table width="100%">

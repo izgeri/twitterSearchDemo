@@ -213,3 +213,27 @@ function saveSearch() {
 		}
 	);
 }
+
+function loadSavedSearches() {
+
+	$.post("loadSavedSearches.php",
+		{},
+		function (response, status) {
+
+			var result = JSON.parse(response);
+
+			if (result.error) {
+				$('#searchError').html(result.error);
+			} else {
+				for (var i = 0; i < result.length; i++) {
+					$("select[id='savedSearches']").append($('<option>',
+						{
+							value: result[i].id,
+							text: result[i].desc
+						}
+					));
+				}
+			}
+		}
+	);
+}

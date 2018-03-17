@@ -37,7 +37,7 @@ if ($location) {
 	$searchSummary .= ' - ' . $location;
 }
 if ($ignoreRetweets != 'false') {
-	$searchSummary .= ', ig rt';
+	$searchSummary .= ', no rt';
 }
 
 try {
