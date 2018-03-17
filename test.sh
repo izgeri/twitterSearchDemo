@@ -1,3 +1,12 @@
 #!/bin/bash -ex
 
-summon docker run --env-file @SUMMONENVFILE twitter-search ./vendor/bin/phpunit tests/twitterSearchTest.php
+function finish {
+  echo 'Removing test environment'
+  echo '---'
+  docker-compose down --rmi 'local' --volumes
+}
+trap finish EXIT
+
+summon docker-compose up -d
+
+docker exec $(docker-compose ps -q twitter-search) ./vendor/bin/phpunit tests/twitterSearchTest.php
