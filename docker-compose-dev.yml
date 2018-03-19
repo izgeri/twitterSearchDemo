@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  pg:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+    volumes:
+      - psql-data:/var/lib/postgresql/data
+      - ./postgres/script/:/docker-entrypoint-initdb.d
+
+  twitter-search:
+    image: twitter-search
+    environment:
+      TWITTER_API_KEY:
+      TWITTER_API_SECRET:
+      GOOGLE_API_KEY:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+    volumes:
+      - ./:/var/www/app/
+    entrypoint: /var/www/app/dev-configure.sh
+    ports:
+      - 4000:80
+    depends_on:
+      - pg
+
+volumes:
+  psql-data:

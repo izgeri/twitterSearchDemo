@@ -36,6 +36,16 @@ security add-generic-password -s "summon" -a "google-maps-geocoding/api_key" -w 
 ```
 You will also need to enable the Google Maps Javascript API in the [API console](https://console.developers.google.com/).
 
+### Other creds required
+
+The application also uses a PostgreSQL database to optionally store saved searches. If you are using the database, you will need to add the following entries to your vault:
+```
+twitter-search/pg_user
+twitter-search/pg_password
+twitter-search/pg_db
+```
+To add them to the OSX keyring, run `security add-generic-password` commands that follow the syntax above.
+
 ### Instructions
 
 This repository contains two scripts to make running the app locally more

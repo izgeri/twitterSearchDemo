@@ -19,10 +19,12 @@ include "keys/keys.php";
 	<script type="text/javascript" src="js/twitter.js"></script>
 </head>
 
-<body>
+<body onload="loadSavedSearches();">
 	<div id="searchBox">
 
 		<table width="100%">
+		<tr><td align="right">saved search:</td>
+		<td align="left"><select id="savedSearches" onchange="loadSavedSearch();"><option value="">&mdash;</option></select></td></tr>
 		<tr><td align="right">twitter username(s):</td>
 		<td align="left"><input type="text" id="searchUsername" /></td></tr>
 
@@ -36,7 +38,8 @@ include "keys/keys.php";
 		<td align="left"><input type="text" id="searchLocation" /></td></tr>
 		<tr><td align="center" colspan="2"><input type="checkbox" id="searchIgnoreRetweets" /> ignore retweets
 		<!-- or <input type="checkbox" id="searchUseCurrentLocation" /> get tweets from my current location<br /><br />--><br />
-		<tr><td colspan="2" align="center"><input type="button" id="searchButton" value="find tweets" onclick="findTweets();" /></td></tr>
+		<tr><td colspan="2" align="center"><input type="button" id="searchButton" value="find tweets" onclick="validateSearch(1);" />
+			<input type="button" id="saveSearchButton" value="save search" onclick="validateSearch(0);" /></td></tr>
 		<tr><td colspan="2" align="center"><span id="searchError" class="warningText"></span></td></tr></table>
 		<input type="hidden" id="googleApiKey" value="<?php echo $googleApiKey; ?>" />
 	</div>
