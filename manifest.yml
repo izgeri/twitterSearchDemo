@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twitter-search-deployment
+  labels:
+    app: twitter-search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twitter-search
+  template:
+    metadata:
+      labels:
+        app: twitter-search
+    spec:
+      containers:
+      - name: twitter-search
+        image: twitter-search
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+          - name: TWITTER_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: twitter-search-secrets
+                key: twitter-api-key
+          - name: TWITTER_API_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: twitter-search-secrets
+                key: twitter-api-secret
+          - name: GOOGLE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: twitter-search-secrets
+                key: google-api-key
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: twitter-search-service
+spec:
+  selector:
+    app: twitter-search
+  ports:
+  - port: 80
+    nodePort: 30002
+  type: NodePort

@@ -78,6 +78,14 @@ To run the unit tests, run
 ```
 from within the base directory of the repository on your local machine. The `test.sh` script will run the test suite in a Docker container.
 
+### Deploying to Minikube
+If you want to install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+and [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), you can
+experiment with deploying (the database-less version of) the application to a local
+Kubernetes cluster.
+
+Instructions are provided in the [minikube-instructions.sh](minikube-instructions.sh) script.
+
 ## Included libraries:
 
 * [FontAwesome](http://fontawesome.io/) by Dave Gandy, used for the loading spinner
